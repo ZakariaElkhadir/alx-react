@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -7,7 +8,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
-    devtool: 'inline-source-map', // Enable inline source maps
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {
@@ -18,11 +19,11 @@ module.exports = {
                 ],
             },
             {
-                test: /\.css$/, // Handle CSS files
+                test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/i, // Handle image files
+                test: /\.(png|jpe?g|gif|svg)$/i,
                 use: [
                     {
                         loader: 'file-loader',
@@ -61,6 +62,10 @@ module.exports = {
         open: true
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            filename: 'index.html'
+        })
     ]
 };
