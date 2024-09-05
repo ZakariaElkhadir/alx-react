@@ -1,6 +1,6 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/index.js',
@@ -12,11 +12,14 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                enforce: "pre",
-                use: [
-                    "source-map-loader"
-                ],
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
+                }
             },
             {
                 test: /\.css$/,
@@ -28,33 +31,15 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[path][name].[ext]',
-                        },
-                    },
-                    {
-                        loader: 'image-webpack-loader',
-                        options: {
-                            mozjpeg: {
-                                progressive: true,
-                            },
-                            optipng: {
-                                enabled: true,
-                            },
-                            pngquant: {
-                                quality: [0.65, 0.90],
-                                speed: 4
-                            },
-                            gifsicle: {
-                                interlaced: false,
-                            },
-                            webp: {
-                                quality: 75
-                            }
+                            name: '[path][name].[ext]'
                         }
                     }
                 ]
             }
         ]
+    },
+    resolve: {
+        extensions: ['.js', '.jsx']
     },
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
@@ -64,8 +49,7 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            template: './src/index.html',
-            filename: 'index.html'
+            template: './src/index.html'
         })
     ]
 };
