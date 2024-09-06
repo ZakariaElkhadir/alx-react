@@ -44,9 +44,19 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
             }
         ]
-        },
+    },
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
         
         
     devServer: {
@@ -56,5 +66,7 @@ module.exports = {
         hot: true,
         open: true
     },
-    mode: 'development'
-}
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ]
+};
