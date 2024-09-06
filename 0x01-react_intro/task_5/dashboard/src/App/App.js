@@ -1,8 +1,7 @@
 import "./App.css";
 import React from 'react';
-import { getFooterCopy } from "./utils";
-import logo from "./holber_logo.jpg";
-import { getFullYear } from "./utils";
+import logo from "../assets/holber_logo.jpg";
+import { getFullYear, getFooterCopy } from "../utils/utils";
 
 function App() {
   return (

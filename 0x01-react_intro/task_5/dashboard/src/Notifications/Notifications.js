@@ -1,7 +1,7 @@
 import React from 'react';
 import './Notifications.css';
-import exit from './x.png'
-import { getLatestNotification } from './utils';
+import exit from '../assets/x.png'
+import { getLatestNotification } from '../utils/utils';
 function Notifications(){
     return (
         <>
