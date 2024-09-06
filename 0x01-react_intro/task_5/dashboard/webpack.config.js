@@ -66,7 +66,9 @@ module.exports = {
         hot: true,
         open: true
     },
+    mode: 'development',
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ]
+    
 };
