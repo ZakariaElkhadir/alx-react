@@ -1,36 +1,54 @@
-const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'development', // or 'production' depending on your needs
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js', // Name of the output file
-        path: path.resolve(__dirname, '../dist'), // Output directory
-    },
-    devtool: 'inline-source-map', // For source maps
-    module: {
-        rules: [
-            {
-                test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
-            },
-            {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 8192, // Inline images smaller than 8kb
-                        },
-                    },
-                ],
-            },
-        ],
-    },
-    devServer: {
-        contentBase: path.join(__dirname, '../dist'),
-        compress: true,
-        port: 8080, // Port for the dev server
-        hot: true,
-    },
+	entry: './src/index.js',
+	output: {
+		filename: 'bundle.js',
+	},
+	mode: 'development',
+	module: {
+		rules: [
+			{
+				test: /\.css$/i,
+				use: ['style-loader', 'css-loader'],
+			},
+			{
+				test: /\.(png|svg|jpg|jpeg|gif)$/i,
+				// type: 'asset/resource',
+				use: [
+					'file-loader',
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							bypassOnDebug: true, // webpack@1.x
+							disable: true, // webpack@2.x and newer
+						},
+					},
+				],
+			},
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: ['babel-loader'],
+			},
+		],
+	},
+	resolve: {
+		extensions: ['*', '.js', '.jsx'],
+	},
+	devServer: {
+		static: './dist',
+		compress: true,
+		open: true,
+		hot: true,
+		port: 8564,
+	},
+	devtool: 'inline-source-map',
+	plugins: [
+		new HtmlWebpackPlugin({
+			name: 'index.html',
+			inject: false,
+			template: './dist/index.html',
+		}),
+	],
 };
