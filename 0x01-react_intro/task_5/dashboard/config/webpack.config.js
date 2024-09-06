@@ -1,17 +1,17 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: path.resolve(__dirname, '../src/index.js'),  // Adjust the path
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, './dist')
+        path: path.resolve(__dirname, '../dist')  // Adjust the path
     },
     module: {
         rules: [
             {
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader']
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i, // Handle image files
@@ -57,11 +57,9 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx']
     },
-        
-        
     devServer: {
         static: {
-            directory: path.resolve(__dirname, 'dist'),
+            directory: path.resolve(__dirname, '../dist'),  // Adjust the path
         },
         hot: true,
         open: true
@@ -70,5 +68,4 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ]
-    
 };
