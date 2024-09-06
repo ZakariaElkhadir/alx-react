@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "validator": "^13.12.0"
+  }
+}
