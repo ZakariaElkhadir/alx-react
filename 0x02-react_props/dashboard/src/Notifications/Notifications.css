@@ -1,0 +1,17 @@
+:root{
+    --urgent: red;
+    --default: darkblue;
+    --hol-color: #e0354b;
+}
+.Notifications{
+    border: dashed 1px var(--hol-color);
+    padding: 5px;
+    
+}
+[data-priority="default"] {
+    
+    color: var(--default);
+  }
+[data-priority="urgent"]{
+    color: var(--urgent);
+}
