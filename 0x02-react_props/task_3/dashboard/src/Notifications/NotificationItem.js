@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Notifications.css'
 
-function NotificationItem({ type = 'default', value = '', html = null }) {
+const NotificationItem = ({ type, value, html }) => {
   return (
-    <li className={`notification-item ${type}`} data-notification-type={type}>
-      {html ? (
-        <span dangerouslySetInnerHTML={html}></span>
-      ) : (
-        value
-      )}
+    <li data-priority={type}>
+      {html ? <span dangerouslySetInnerHTML={html} /> : value}
     </li>
   );
-}
+};
 
 NotificationItem.propTypes = {
   type: PropTypes.string.isRequired,
