@@ -1,6 +1,6 @@
 import React from 'react'
 import CourseListRow from './CourseListRow'
-import './CrouseList.css'
+
 const CourseList = () => {
     return (
         <table id="CourseList">

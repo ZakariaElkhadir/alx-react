@@ -6,7 +6,13 @@
 .Notifications{
     border: dashed 1px var(--hol-color);
     padding: 5px;
+    width: 300px;
+    float: right;
     
+}
+.menuItem{
+    display: flex;
+    justify-content: flex-end;
 }
 [data-priority="default"] {
     

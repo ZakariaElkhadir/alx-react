@@ -33,4 +33,5 @@ describe('App tests', () => {
 
 		expect(component.contains(<Footer />)).toBe(true);
 	});
+	
 });

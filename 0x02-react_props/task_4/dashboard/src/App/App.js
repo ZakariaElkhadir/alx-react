@@ -3,18 +3,30 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
 import Notifications from "../Notifications/Notifications";
-import React from "react";
+import CourseList from "../CourseList/CourseList"; // Assuming you have a CourseList component
+import React, { useState } from "react";
+import propTypes from "prop-types";
 
 function App() {
+  const [isLoggedIn] = useState(false);
+
   return (
     <>
       <Notifications />
       <Header />
       <hr />
-      <Login />
+      {isLoggedIn ? <CourseList /> : <Login />}
       <Footer />
     </>
   );
 }
+
+App.propTypes = {
+  isLoggedIn: propTypes.bool,
+};
+
+App.defaultProps = {
+  isLoggedIn: false,
+};
 
 export default App;
