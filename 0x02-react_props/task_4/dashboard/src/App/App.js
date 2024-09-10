@@ -7,8 +7,7 @@ import CourseList from "../CourseList/CourseList"; // Assuming you have a Course
 import React, { useState } from "react";
 import propTypes from "prop-types";
 
-function App() {
-  const [isLoggedIn] = useState(false);
+function App({isLoggedIn}) {
 
   return (
     <>
