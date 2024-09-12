@@ -38,8 +38,6 @@ CourseList.propTypes = {
     ),
 };
 
-CourseList.defaultProps = {
-    listCourses: [],
-};
+
 
 export default CourseList;
