@@ -8,7 +8,7 @@ const NotificationItem = ({ type = 'default', value, html }) => {
         className={`notification-item ${type}`}
         data-priority={type}
       >
-        <span dangerouslySetInnerHTML={html} />
+      <span dangerouslySetInnerHTML={{ __html: html.__html }} />
       </li>
     );
   }
