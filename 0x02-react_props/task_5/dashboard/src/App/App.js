@@ -3,18 +3,23 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
 import Notifications from "../Notifications/Notifications";
-import CourseList from "../CourseList/CourseList"; // Assuming you have a CourseList component
+import CourseList from "../CourseList/CourseList";
 import React, { useState } from "react";
 import propTypes from "prop-types";
 
-function App({isLoggedIn}) {
+const listCourses = [
+  { id: 1, name: 'ES6', credit: 60 },
+  { id: 2, name: 'Webpack', credit: 20 },
+  { id: 3, name: 'React', credit: 40 }
+];
 
+function App({ isLoggedIn }) {
   return (
     <>
       <Notifications />
       <Header />
       <hr />
-      {isLoggedIn ? <CourseList /> : <Login />}
+      {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
       <Footer />
     </>
   );
