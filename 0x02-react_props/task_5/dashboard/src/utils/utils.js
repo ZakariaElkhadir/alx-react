@@ -9,4 +9,4 @@ export function getFooterCopy(isIndex) {
     }
 }
 export const getLatestNotification = () =>
-	'<strong>Urgent Requirement</strong> - complete by EOD';
+	'<strong>Urgent requirement</strong> - complete by EOD';

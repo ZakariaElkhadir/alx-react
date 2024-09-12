@@ -1,37 +1,40 @@
 import React from 'react';
-import App from './App';
-import Login from '../Login/Login';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import Notifications from '../Notifications/Notifications';
 import { shallow } from 'enzyme';
+import App from './App';
+import Notifications from '../Notifications/Notifications';
+import Header from '../Header/Header';
+import Login from '../Login/Login';
+import Footer from '../Footer/Footer';
+import CourseList from '../CourseList/CourseList';
 
+describe('App component tests', () => {
+  it('should render without crashing', () => {
+    const component = shallow(<App />);
+    expect(component.exists()).toBe(true);
+  });
 
-describe('App tests', () => {
-	it('renders without crashing', () => {
-		const component = shallow(<App />);
+  it('should render Notifications component', () => {
+    const component = shallow(<App />);
+    expect(component.find(Notifications).length).toBe(1);
+  });
 
-		expect(component).toBeDefined();
-	});
-	it('should render Notifications component', () => {
-		const component = shallow(<App />);
+  it('should render Header component', () => {
+    const component = shallow(<App />);
+    expect(component.find(Header).length).toBe(1);
+  });
 
-		expect(component.contains(<Notifications />)).toBe(true);
-	});
-	it('should render Header component', () => {
-		const component = shallow(<App />);
+  it('should render Login component when isLoggedIn is false', () => {
+    const component = shallow(<App isLoggedIn={false} />);
+    expect(component.find(Login).length).toBe(1);
+  });
 
-		expect(component.contains(<Header />)).toBe(true);
-	});
-	it('should render Login Component', () => {
-		const component = shallow(<App />);
+  it('should render CourseList component when isLoggedIn is true', () => {
+    const component = shallow(<App isLoggedIn={true} />);
+    expect(component.find(CourseList).length).toBe(1);
+  });
 
-		expect(component.contains(<Login />)).toBe(true);
-	});
-	it('should render Footer component', () => {
-		const component = shallow(<App />);
-
-		expect(component.contains(<Footer />)).toBe(true);
-	});
-	
+  it('should render Footer component', () => {
+    const component = shallow(<App />);
+    expect(component.find(Footer).length).toBe(1);
+  });
 });
