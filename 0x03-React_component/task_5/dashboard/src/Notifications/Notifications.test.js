@@ -34,4 +34,31 @@ describe('Notifications component', () => {
     // Restore the console.log function
     consoleSpy.mockRestore();
   });
+
+  it('does not rerender when updating props with the same list', () => {
+    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
+    const instance = wrapper.instance();
+    const shouldComponentUpdateSpy = jest.spyOn(instance, 'shouldComponentUpdate');
+
+    // Update props with the same list
+    wrapper.setProps({ listNotifications });
+
+    // Check if shouldComponentUpdate was called and returned false
+    expect(shouldComponentUpdateSpy).toHaveBeenCalled();
+    expect(shouldComponentUpdateSpy).toHaveReturnedWith(false);
+  });
+
+  it('rerenders when updating props with a longer list', () => {
+    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
+    const instance = wrapper.instance();
+    const shouldComponentUpdateSpy = jest.spyOn(instance, 'shouldComponentUpdate');
+
+    // Update props with a longer list
+    const newListNotifications = [...listNotifications, { id: 4, type: 'default', value: 'New notification' }];
+    wrapper.setProps({ listNotifications: newListNotifications });
+
+    // Check if shouldComponentUpdate was called and returned true
+    expect(shouldComponentUpdateSpy).toHaveBeenCalled();
+    expect(shouldComponentUpdateSpy).toHaveReturnedWith(true);
+  });
 });
