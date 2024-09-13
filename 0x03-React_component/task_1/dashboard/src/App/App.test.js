@@ -32,4 +32,8 @@ describe('App component tests', () => {
 
     alertMock.mockRestore();
   });
+  afterAll(() => {
+    // Clean up the mock
+    delete global.document;
+  });
 });
