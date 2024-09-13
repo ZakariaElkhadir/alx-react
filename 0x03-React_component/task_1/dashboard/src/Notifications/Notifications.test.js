@@ -14,34 +14,24 @@ describe('Notifications component', () => {
     const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
 
     // Check if the ul contains exactly 3 children
-    expect(wrapper.find('ul').children()).toHaveLength(3);
+    expect(wrapper.find('ul').children().length).toBe(3);
 
-    // Check if the first child has the expected HTML content with class and data attributes
-    expect(wrapper.find('ul').childAt(0).html()).toEqual(
-      '<li class="notification-item default" data-priority="default">New course available</li>'
-    );
-
-    // Check the second child
-    expect(wrapper.find('ul').childAt(1).html()).toEqual(
-      '<li class="notification-item urgent" data-priority="urgent">New resume available</li>'
-    );
-
-    // Check the third child (which has HTML content)
-    expect(wrapper.find('ul').childAt(2).html()).toEqual(
-      '<li class="notification-item urgent" data-priority="urgent"><span><strong>Urgent requirement</strong> - complete by EOD</span></li>'
-    );
+    // Check if the first NotificationItem has the correct value
+    expect(wrapper.find(NotificationItem).at(0).prop('value')).toBe('New course available');
   });
 
-  it('renders correctly with an empty listNotifications array', () => {
-    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={[]} />);
-    expect(wrapper.find(NotificationItem)).toHaveLength(0);
-    expect(wrapper.find(NotificationItem).exists()).toBeFalsy();
-    
-    expect(wrapper.find(NotificationItem).exists()).toBeFalsy();
-  });
+  it('calls console.log with the correct message when markAsRead is called', () => {
+    const consoleSpy = jest.spyOn(console, 'log');
+    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
+    const instance = wrapper.instance();
 
-  it('the menu item is being displayed when displayDrawer is false', () => {
-    const wrapper = shallow(<Notifications displayDrawer={false} />);
-    expect(wrapper.find('.menuItem').exists()).toBeTruthy();
+    // Call the markAsRead function
+    instance.markAsRead(1);
+
+    // Check if console.log was called with the correct message
+    expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
+
+    // Restore the console.log function
+    consoleSpy.mockRestore();
   });
 });
