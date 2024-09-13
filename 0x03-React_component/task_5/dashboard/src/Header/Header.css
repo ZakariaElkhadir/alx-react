@@ -1,0 +1,11 @@
+:root {
+    --hol-color: #e0354b;
+    --font: Arial, Helvetica, sans-serif;
+  }
+  
+.App-header {
+    font-family: var(--font);
+    display: flex;
+    align-items: center;
+    padding: 16px; 
+  }
