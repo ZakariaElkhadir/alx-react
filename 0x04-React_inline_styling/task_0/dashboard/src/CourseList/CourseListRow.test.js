@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import CourseListRow from './CourseListRow';
 
+
 describe('CourseListRow component', () => {
     it('renders one cell with colspan = 2 when isHeader is true and textSecondCell does not exist', () => {
         const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Header" />);

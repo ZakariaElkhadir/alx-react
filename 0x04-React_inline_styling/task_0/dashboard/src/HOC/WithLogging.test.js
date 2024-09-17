@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import withLogging from './withLogging';
+import withLogging from './WithLogging'
 import App from '../App/App';
 
 describe('withLogging HOC', () => {

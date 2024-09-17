@@ -6,24 +6,26 @@ const CourseListRow = ({
   textFirstCell,
   textSecondCell = null,
 }) => {
+  const bgColorRow = {backgroundColor: '#f5f5f5ab'}
+  const bgHeaderRow = {backgroundColor: '#deb5b545'}
   if (isHeader) {
     if (textSecondCell === null) {
       return (
-        <tr>
-          <th colSpan={2}>{textFirstCell}</th>
+        <tr style={bgColorRow}>
+          <th style={bgHeaderRow} colSpan={2}>{textFirstCell}</th>
         </tr>
       );
     } else {
       return (
-        <tr>
-          <th>{textFirstCell}</th>
-          <th>{textSecondCell}</th>
+        <tr style={bgColorRow}>
+          <th style={bgHeaderRow}>{textFirstCell}</th>
+          <th style={bgHeaderRow}>{textSecondCell}</th>
         </tr>
       );
     }
   } else {
     return (
-      <tr>
+      <tr style={bgColorRow}>
         <td>{textFirstCell}</td>
         <td>{textSecondCell}</td>
       </tr>
