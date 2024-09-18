@@ -1,8 +1,3 @@
-:root{
-    --urgent: red;
-    --default: darkblue;
-    --hol-color: #e0354b;
-}
 
 [data-priority="default"] {
     
