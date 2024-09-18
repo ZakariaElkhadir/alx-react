@@ -1,11 +1,5 @@
 #CourseList {
-    width: 80%;
-    border-collapse: collapse;
-    margin: auto;
+    
 }
 
 
-#CourseList th, #CourseList td {
-    border: 1px solid black;
-    padding: 8px;
-}
