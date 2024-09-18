@@ -1,7 +1,6 @@
 import React from 'react'
 import BodySection from './BodySection'
 import { StyleSheet, css } from 'aphrodite';
-import './BodySectionWithMarginBottom.css'
 
 import PropTypes from 'prop-types';
 
