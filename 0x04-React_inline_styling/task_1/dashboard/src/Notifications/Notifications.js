@@ -4,7 +4,6 @@ import NotificationItem from "./NotificationItem";
 import NotificationShape from "./NotificationItemShape";
 import exit from "../assets/x.png";
 import { StyleSheet, css } from "aphrodite";
-import "./Notifications.css";
 
 class Notifications extends Component {
   markAsRead = (id) => {
