@@ -3,21 +3,11 @@
     --default: darkblue;
     --hol-color: #e0354b;
 }
-.Notifications{
-    border: dashed 1px var(--hol-color);
-    padding: 5px;
-    width: 300px;
-    float: right;
-    
-}
-.menuItem{
-    display: flex;
-    justify-content: flex-end;
-}
+
 [data-priority="default"] {
     
-    color: var(--default);
+    color: darkblue;
   }
 [data-priority="urgent"]{
-    color: var(--urgent);
+    color: red;
 }

@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import NotificationItem from './NotificationItem';
-import NotificationShape from './NotificationItemShape';
-import exit from '../assets/x.png';
-import './Notifications.css';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import NotificationItem from "./NotificationItem";
+import NotificationShape from "./NotificationItemShape";
+import exit from "../assets/x.png";
+import { StyleSheet, css } from "aphrodite";
+import "./Notifications.css";
 
 class Notifications extends Component {
   markAsRead = (id) => {
@@ -11,7 +12,9 @@ class Notifications extends Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.listNotifications.length > this.props.listNotifications.length;
+    return (
+      nextProps.listNotifications.length > this.props.listNotifications.length
+    );
   }
 
   render() {
@@ -19,11 +22,9 @@ class Notifications extends Component {
 
     return (
       <>
-        <div className="menuItem">
-          Your notification
-        </div>
+        <div className={`menuItem ${css(styles.MenuItem)}`}>Your notification</div>
         {displayDrawer && (
-          <div className="Notifications">
+          <div className={`Notifications ${css(styles.Notification)}`}>
             <button
               aria-label="Close"
               onClick={() => console.log("Close button has been clicked")}
@@ -53,7 +54,18 @@ class Notifications extends Component {
     );
   }
 }
-
+const styles = StyleSheet.create({
+  Notification: {
+    border: 'dashed 1px #e0354b',
+    padding: '5px',
+    width: '300px',
+    float: 'right'
+  },
+  MenuItem: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+})
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationShape),
