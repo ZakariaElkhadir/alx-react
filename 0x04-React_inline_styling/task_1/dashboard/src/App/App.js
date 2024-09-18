@@ -2,10 +2,11 @@ import "./App.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
+import { StyleSheet, css } from "aphrodite";
 import Notifications from "../Notifications/Notifications";
 import CourseList from "../CourseList/CourseList";
 import React, { Component } from "react";
-import propTypes, { func } from "prop-types";
+import propTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
 import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
@@ -39,10 +40,12 @@ class App extends Component {
       this.props.logOut();
     }
   };
+
   render() {
-    const { isLoggedIn, logOut } = this.props;
+    const { isLoggedIn } = this.props;
     return (
       <>
+      <div className={css(styles.body)}>
         <Notifications listNotifications={listNotifications} />
         <Header />
         <hr />
@@ -52,18 +55,46 @@ class App extends Component {
           </BodySectionWithMarginBottom>
         ) : (
           <BodySectionWithMarginBottom title="Log in to continue">
-          <Login />
+            <Login />
           </BodySectionWithMarginBottom>
         )}
         <BodySection title="News from the School">
           <p>Here is some random text about the latest news from the school.</p>
         </BodySection>
-        
-        <Footer />
+        </div>
+  
+        <div className={css(styles.footer)}>
+          <hr />
+          <Footer/>
+          </div>
       </>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  body: {
+    //fontFamily: 'Arial, sans-serif',
+    margin: 0,
+    padding: 0,
+    boxSizing: 'border-box',
+  },
+  footer: {
+    fontFamily: 'var(--font)',
+    fontStyle: 'italic',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    position: 'fixed',
+    left: '0',
+    bottom: '0',
+    width: '100%',
+    padding: '16px',
+    boxSizing: 'border-box',
+  },
+});
 
 App.propTypes = {
   isLoggedIn: propTypes.bool,
