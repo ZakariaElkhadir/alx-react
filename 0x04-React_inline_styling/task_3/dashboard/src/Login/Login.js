@@ -15,20 +15,21 @@ function Login() {
         <label htmlFor="password"> Password: </label>
         <input type="password" id="password" />
       </div>
-      <button>OK</button>
+      <button className={css(styles.button)}>OK</button>
     </div>
   );
 }
 const styles = StyleSheet.create({
   Login: {
     margin: '20px',
-    '@media (max-width: 900)' :{
+    '@media (max-width: 900px)': {
       margin: '10px',
     },
   },
   inputGroup: {
     display: 'flex',
     flexDirection: "column",
+    width: '20em',
     marginBottom: '10px',
     '@media (min-width: 900px)': {
       flexDirection: 'row',
@@ -37,11 +38,12 @@ const styles = StyleSheet.create({
     },
   },
   button: {
+    border: '1px solid #FFBF00',
     display: 'block',
     marginTop: '20px',
     '@media (min-width: 900px)': {
       marginTop: '30px'
     }
   }
-})
+});
 export default Login;
