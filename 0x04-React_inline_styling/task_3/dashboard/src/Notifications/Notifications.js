@@ -31,19 +31,21 @@ class Notifications extends Component {
               <img src={exit} alt="Close" width={10} />
             </button>
             <p>Here is the list of notifications</p>
-            <ul>
+            <ul className={css(styles.ul)}>
               {listNotifications.length === 0 ? (
                 <li>No new notification for now</li>
               ) : (
                 listNotifications.map(({ id, html, type, value }) => (
-                  <NotificationItem
-                    id={id}
-                    key={id}
-                    type={type}
-                    value={value}
-                    html={html ? { __html: html } : undefined}
-                    markAsRead={() => this.markAsRead(id)}
-                  />
+                  <li className={css(styles.notItem)} key={id}>
+                    <NotificationItem
+                      id={id}
+                      type={type}
+                      value={value}
+                      html={html ? { __html: html } : undefined}
+                      markAsRead={() => this.markAsRead(id)}
+                    />
+                  </li>
+                
                 ))
               )}
             </ul>
@@ -53,18 +55,44 @@ class Notifications extends Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   Notification: {
     border: 'dashed 1px #e0354b',
     padding: '5px',
     width: '300px',
-    float: 'right'
+    float: 'right',
+    '@media (max-width: 900px)': {
+      width: '100%',
+      height: '100%',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 1000,
+      backgroundColor: 'white',
+      fontSize: '20px',
+    },
   },
   MenuItem: {
+    padding: '10px',
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
-})
+  notItem: {
+    '@media (max-width: 900px)': {
+      listStyleType: 'none',
+      borderBottom: '1px solid black'
+    },
+  },
+  ul: {
+    '@media (max-width: 900px)': {
+      padding: 0,
+    },
+  },
+});
+
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationShape),
