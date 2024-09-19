@@ -24,7 +24,7 @@ class NotificationItem extends React.PureComponent {
 
     return (
       <li
-        className={css(priorityStyle)}
+        className={css(priorityStyle, styles.notificationItem)}
         data-priority={type}
         onClick={this.handleClick}
       >
@@ -40,6 +40,13 @@ const styles = StyleSheet.create({
   },
   defaultPriority: {
     color: '#00008b'
+  },
+  notificationItem: {
+    '@media (max-width: 900px)': {
+      width: '100%',
+      fontSize: '20px',
+  
+    },
   }
 });
 

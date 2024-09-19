@@ -28,7 +28,7 @@ class Notifications extends Component {
               aria-label="Close"
               onClick={() => console.log("Close button has been clicked")}
             >
-              <img src={exit} alt="Close" width={10} />
+              <img  src={exit} alt="Close" width={10} />
             </button>
             <p>Here is the list of notifications</p>
             <ul className={css(styles.ul)}>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   notItem: {
     '@media (max-width: 900px)': {
       listStyleType: 'none',
-      borderBottom: '1px solid black'
+      borderBottom: '1px solid black',
     },
   },
   ul: {
