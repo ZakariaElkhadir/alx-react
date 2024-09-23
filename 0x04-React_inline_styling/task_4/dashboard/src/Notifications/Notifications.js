@@ -5,6 +5,24 @@ import NotificationShape from "./NotificationItemShape";
 import exit from "../assets/x.png";
 import { StyleSheet, css } from "aphrodite";
 
+const fadeInAnimation = {
+  '0%': {
+    opacity: 0.5,
+  },
+  '100%': {
+    opacity: 1,
+  },
+};
+
+const bounceAnimation = {
+  '0%, 100%': {
+    transform: 'translateY(0px)',
+  },
+  '50%': {
+    transform: 'translateY(-5px)',
+  },
+};
+
 class Notifications extends Component {
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
@@ -21,14 +39,14 @@ class Notifications extends Component {
 
     return (
       <>
-        <div className={`menuItem ${css(styles.MenuItem)}`}>Your notification</div>
+        <div className={`menuItem ${css(styles.MenuItem, displayDrawer && styles.hiddenMenuItem)}`}>Your notification</div>
         {displayDrawer && (
           <div className={`Notifications ${css(styles.Notification)}`}>
             <button
               aria-label="Close"
               onClick={() => console.log("Close button has been clicked")}
             >
-              <img  src={exit} alt="Close" width={10} />
+              <img src={exit} alt="Close" width={10} />
             </button>
             <p>Here is the list of notifications</p>
             <ul className={css(styles.ul)}>
@@ -45,7 +63,6 @@ class Notifications extends Component {
                       markAsRead={() => this.markAsRead(id)}
                     />
                   </li>
-                
                 ))
               )}
             </ul>
@@ -77,8 +94,21 @@ const styles = StyleSheet.create({
   },
   MenuItem: {
     padding: '10px',
-    display: 'flex',
-    justifyContent: 'flex-end',
+    float: 'right',
+    backgroundColor: '#fff8f8',
+    cursor: 'pointer',
+    position: 'fixed',
+    top: '10px',
+    right: '10px',
+    zIndex: 1001,
+    ':hover': {
+      animationName: [fadeInAnimation, bounceAnimation],
+      animationDuration: ['1s', '0.5s'],
+      animationIterationCount: 3,
+    },
+    hiddenMenuItem: {
+      display: 'none',
+    },
   },
   notItem: {
     '@media (max-width: 900px)': {
