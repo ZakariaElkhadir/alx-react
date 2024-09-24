@@ -7,3 +7,14 @@ import Enzyme from 'enzyme';
 import Adapter from '@cfaester/enzyme-adapter-react-18';
 
 Enzyme.configure({ adapter: new Adapter() });
+
+// Mock the document object for aphrodite
+if (typeof document === 'undefined') {
+  global.document = {
+    querySelector: jest.fn(),
+    createElement: jest.fn(() => ({
+      setAttribute: jest.fn(),
+      appendChild: jest.fn(),
+    })),
+  };
+}

@@ -1,4 +1,3 @@
-
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
@@ -32,14 +31,17 @@ class App extends Component {
       displayDrawer: false,
     };
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
-    this.handleHideDrawer= this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
-  handleDisplayDrawer(){
-    this.setState({ displayDrawer: true});
+
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
   }
-  handleHideDrawer(){
-    this.setState({ displayDrawer: false})
+
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false });
   }
+
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown);
   }
@@ -57,34 +59,36 @@ class App extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    const {displayDrawer} = this.state;
+    const { displayDrawer } = this.state;
     return (
       <>
-      <div className={css(styles.body)}>
-        <Notifications listNotifications={listNotifications}
-        displayDrawer={displayDrawer}
-        handleDisplayDrawer={this.handleDisplayDrawer}
-        handleHideDrawer={this.handleHideDrawer}/>
-        <Header />
-        <hr />
-        {isLoggedIn ? (
-          <BodySectionWithMarginBottom title="Course list">
-            <CourseList listCourses={listCourses} />
-          </BodySectionWithMarginBottom>
-        ) : (
-          <BodySectionWithMarginBottom title="Log in to continue">
-            <Login />
-          </BodySectionWithMarginBottom>
-        )}
-        <BodySection title="News from the School">
-          <p>Here is some random text about the latest news from the school.</p>
-        </BodySection>
+        <div className={css(styles.body)}>
+          <Notifications
+            listNotifications={listNotifications}
+            displayDrawer={displayDrawer}
+            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.handleHideDrawer}
+          />
+          <Header />
+          <hr />
+          {isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseList listCourses={listCourses} />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login />
+            </BodySectionWithMarginBottom>
+          )}
+          <BodySection title="News from the School">
+            <p>Here is some random text about the latest news from the school.</p>
+          </BodySection>
         </div>
-  
+
         <div className={css(styles.footer)}>
           <hr />
-          <Footer/>
-          </div>
+          <Footer />
+        </div>
       </>
     );
   }

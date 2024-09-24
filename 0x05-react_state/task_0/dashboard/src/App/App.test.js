@@ -2,7 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 import Notifications from '../Notifications/Notifications';
-
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Login from '../Login/Login';
+import CourseList from '../CourseList/CourseList';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 
 describe('App component tests', () => {
   it('should render without crashing', () => {
@@ -29,6 +33,52 @@ describe('App component tests', () => {
 
     alertMock.mockRestore();
   });
+
+  it('should render Header component', () => {
+    const component = shallow(<App />);
+    expect(component.find(Header).length).toBe(1);
+  });
+
+  it('should render Footer component', () => {
+    const component = shallow(<App />);
+    expect(component.find(Footer).length).toBe(1);
+  });
+
+  it('should render Login component when isLoggedIn is false', () => {
+    const component = shallow(<App isLoggedIn={false} />);
+    expect(component.find(Login).length).toBe(1);
+    expect(component.find(CourseList).length).toBe(0);
+  });
+
+  it('should render CourseList component when isLoggedIn is true', () => {
+    const component = shallow(<App isLoggedIn={true} />);
+    expect(component.find(Login).length).toBe(0);
+    expect(component.find(CourseList).length).toBe(1);
+  });
+
+  it('should render BodySectionWithMarginBottom component', () => {
+    const component = shallow(<App />);
+    expect(component.find(BodySectionWithMarginBottom).length).toBe(2);
+  });
+
+  it('should have default state for displayDrawer as false', () => {
+    const component = shallow(<App />);
+    expect(component.state('displayDrawer')).toBe(false);
+  });
+
+  it('should update state to true when handleDisplayDrawer is called', () => {
+    const component = shallow(<App />);
+    component.instance().handleDisplayDrawer();
+    expect(component.state('displayDrawer')).toBe(true);
+  });
+
+  it('should update state to false when handleHideDrawer is called', () => {
+    const component = shallow(<App />);
+    component.instance().handleDisplayDrawer(); // First set it to true
+    component.instance().handleHideDrawer();
+    expect(component.state('displayDrawer')).toBe(false);
+  });
+
   afterAll(() => {
     // Clean up the mock
     delete global.document;

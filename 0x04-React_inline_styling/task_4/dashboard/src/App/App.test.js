@@ -2,10 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 import Notifications from '../Notifications/Notifications';
-import Header from '../Header/Header';
-import Login from '../Login/Login';
-import Footer from '../Footer/Footer';
-import CourseList from '../CourseList/CourseList';
+
 
 describe('App component tests', () => {
   it('should render without crashing', () => {
