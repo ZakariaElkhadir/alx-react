@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
 
-export default function getImmutableObject(object) {
-  return fromJS(object);
+export default function getImmutableObject(params) {
+  return fromJS(params);
 }
