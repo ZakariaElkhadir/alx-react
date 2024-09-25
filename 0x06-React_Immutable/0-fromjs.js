@@ -1,4 +1,3 @@
-#!/usr/bin/node
 import { fromJS } from 'immutable';
 
 function getImmutableObject (params = {}) {
