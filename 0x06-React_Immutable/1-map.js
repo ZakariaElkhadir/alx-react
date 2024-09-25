@@ -1,7 +1,6 @@
 #!use/bin/node
 import { Map } from 'immutable';
-function getImmutableObject (params = {}) {
-  const immutableMap = Map(params);
-  return immutableMap;
+export default function getImmutableObject (params = {}) {
+  return Map(params);
 }
-export default getImmutableObject;
+
