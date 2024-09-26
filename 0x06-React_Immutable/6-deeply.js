@@ -1,6 +1,5 @@
-import { Map } from "immutable";
+import { Map } from 'immutable';
 
-
-function mergeDeeplyElements(page1, page2) {
-    return Map(page1).mergeDeep(Map(page2)).List();
+export default function mergeDeeplyElements (page1, page2) {
+  return Map(page1).mergeDeep(Map(page2)).List();
 }
