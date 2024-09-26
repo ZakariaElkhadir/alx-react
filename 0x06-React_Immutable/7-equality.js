@@ -1,7 +1,6 @@
-import { Map } from 'immutable';
+import { Map, is } from 'immutable';
 function areMapsEqual (map1, map2) {
-  if (Map(map1) === Map(map2)) {
-    return true;
-  }
+  return is(Map(map1), Map(map2)) === true;
 }
+
 export default areMapsEqual;
