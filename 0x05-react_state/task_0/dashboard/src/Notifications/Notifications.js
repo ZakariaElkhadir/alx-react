@@ -30,21 +30,26 @@ class Notifications extends Component {
 
   shouldComponentUpdate(nextProps) {
     return (
-      nextProps.listNotifications.length > this.props.listNotifications.length
+      nextProps.listNotifications.length > this.props.listNotifications.length ||
+      nextProps.displayDrawer !== this.props.displayDrawer
     );
   }
+
 
   render() {
     const { displayDrawer, listNotifications = [] } = this.props;
 
     return (
       <>
-        <div className={`menuItem ${css(styles.MenuItem, displayDrawer && styles.hiddenMenuItem)}`}>Your notification</div>
+        <div onClick={this.props.handleDisplayDrawer} className={`menuItem ${css(styles.MenuItem, displayDrawer && styles.hiddenMenuItem)}`}>Your notification</div>
         {displayDrawer && (
           <div className={`Notifications ${css(styles.Notification)}`}>
             <button
               aria-label="Close"
-              onClick={() => console.log("Close button has been clicked")}
+              onClick={(e) => {
+                console.log("Close button has been clicked");
+                this.props.handleHideDrawer();
+              }}
             >
               <img src={exit} alt="Close" width={10} />
             </button>
@@ -126,10 +131,15 @@ const styles = StyleSheet.create({
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationShape),
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
 };
 
 Notifications.defaultProps = {
   displayDrawer: false,
+  listNotifications: [],
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {},
 };
 
 export default Notifications;
