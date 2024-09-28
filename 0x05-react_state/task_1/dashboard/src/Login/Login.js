@@ -1,24 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, css } from "aphrodite";
+
+
+function handleLoginSubmit(event) {
+  event.preventDefault();
+  setIsLoggedIn(true);
+}
 function Login() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const[email, setEmail] = useState("");
+  const[password, setPassword] = useState("")
+
   return (
     
     <div className={`App-body ${css(styles.Login)}`}>
       <p>Login to access the full dashboard</p>
-      
+      <form onSubmit={handleLoginSubmit}>
       <div className={css(styles.inputGroup)}>
         <label htmlFor="email"> Email: </label>
-        <input type="text" id="email" />
+        <input type="text"
+        id="email"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        />
       </div>
       
       <div className={css(styles.inputGroup)}>
         <label htmlFor="password"> Password: </label>
         <input type="password" id="password" />
       </div>
-      <button className={css(styles.button)}>OK</button>
+      <input type="submit" />
+      </form>
     </div>
   );
 }
+
 const styles = StyleSheet.create({
   Login: {
     margin: '20px',
