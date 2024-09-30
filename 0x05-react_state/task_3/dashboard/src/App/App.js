@@ -19,7 +19,14 @@ class App extends React.Component {
       displayDrawer: false,
       user: user,
       logOut: this.logOut,
+      
+      listNotifications : [
+        { id: 1, type: "default", value: "New course available" },
+        { id: 2, type: "urgent", value: "New resume available" },
+        { id: 3, type: "urgent", html: getLatestNotification() },
+      ],
     };
+    
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
@@ -34,11 +41,7 @@ class App extends React.Component {
     { id: 3, name: "React", credit: 40 },
   ];
 
-  listNotifications = [
-    { id: 1, type: "default", value: "New course available" },
-    { id: 2, type: "urgent", value: "New resume available" },
-    { id: 3, type: "urgent", html: getLatestNotification() },
-  ];
+ 
 
   handleKeyPress(e) {
     if (e.ctrlKey && e.key === "h") {
@@ -63,6 +66,7 @@ class App extends React.Component {
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyPress);
   }
+  
 
   logIn(email, password) {
     this.setState({
@@ -80,6 +84,14 @@ class App extends React.Component {
     });
   }
 
+  markNotificationAsRead(id){
+    this.setState((prevState) => ({
+      listNotifications: prevState.listNotifications.filter(
+      (notification) => notification.id !== id
+      ),
+    }));
+  }
+
   render() {
     return (
       <AppContext.Provider
@@ -92,7 +104,8 @@ class App extends React.Component {
           <div className={css(styles.App)}>
             <div className="heading-section">
               <Notifications
-                listNotifications={this.listNotifications}
+                markNotificationAsRead={this.markNotificationAsRead}
+                listNotifications={this.state.listNotifications}
                 displayDrawer={this.state.displayDrawer}
                 handleDisplayDrawer={this.handleDisplayDrawer}
                 handleHideDrawer={this.handleHideDrawer}

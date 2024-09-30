@@ -79,6 +79,23 @@ describe('App component tests', () => {
     expect(component.state('displayDrawer')).toBe(false);
   });
 
+  it('should update state when markNotificationAsRead is called', () => {
+    const component = shallow(<App />);
+    const instance = component.instance();
+    const initialNotifications = [
+      { id: 1, type: "default", value: "New course available" },
+      { id: 2, type: "urgent", value: "New resume available" },
+      { id: 3, type: "urgent", html: "<strong>Urgent requirement</strong>" },
+    ];
+    component.setState({ listNotifications: initialNotifications });
+
+    instance.markNotificationAsRead(2);
+    expect(component.state('listNotifications')).toEqual([
+      { id: 1, type: "default", value: "New course available" },
+      { id: 3, type: "urgent", html: "<strong>Urgent requirement</strong>" },
+    ]);
+  });
+
   afterAll(() => {
     // Clean up the mock
     delete global.document;
