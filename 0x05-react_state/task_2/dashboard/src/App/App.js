@@ -98,6 +98,7 @@ class App extends React.Component {
                 handleHideDrawer={this.handleHideDrawer}
               />
               <Header />
+              <hr/>
             </div>
             {this.state.user.isLoggedIn ? (
               <BodySectionWithMarginBottom title="Course list">
@@ -114,6 +115,7 @@ class App extends React.Component {
                 ipsa iste vero dolor voluptates.
               </p>
             </BodySection>
+            
             <Footer />
           </div>
         </React.Fragment>
