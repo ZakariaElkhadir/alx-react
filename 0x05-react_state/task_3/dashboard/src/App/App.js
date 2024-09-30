@@ -19,20 +19,20 @@ class App extends React.Component {
       displayDrawer: false,
       user: user,
       logOut: this.logOut,
-      
-      listNotifications : [
+
+      listNotifications: [
         { id: 1, type: "default", value: "New course available" },
         { id: 2, type: "urgent", value: "New resume available" },
         { id: 3, type: "urgent", html: getLatestNotification() },
       ],
     };
-    
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   listCourses = [
@@ -40,8 +40,6 @@ class App extends React.Component {
     { id: 2, name: "Webpack", credit: 20 },
     { id: 3, name: "React", credit: 40 },
   ];
-
- 
 
   handleKeyPress(e) {
     if (e.ctrlKey && e.key === "h") {
@@ -66,7 +64,6 @@ class App extends React.Component {
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyPress);
   }
-  
 
   logIn(email, password) {
     this.setState({
@@ -84,10 +81,10 @@ class App extends React.Component {
     });
   }
 
-  markNotificationAsRead(id){
+  markNotificationAsRead(id) {
     this.setState((prevState) => ({
       listNotifications: prevState.listNotifications.filter(
-      (notification) => notification.id !== id
+        (notification) => notification.id !== id
       ),
     }));
   }
@@ -111,7 +108,7 @@ class App extends React.Component {
                 handleHideDrawer={this.handleHideDrawer}
               />
               <Header />
-              <hr/>
+              <hr />
             </div>
             {this.state.user.isLoggedIn ? (
               <BodySectionWithMarginBottom title="Course list">
@@ -124,11 +121,13 @@ class App extends React.Component {
             )}
             <BodySection title="News from the school">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis at tempora odio, necessitatibus repudiandae reiciendis cum nemo sed asperiores ut molestiae eaque aliquam illo
-                ipsa iste vero dolor voluptates.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Perspiciatis at tempora odio, necessitatibus repudiandae
+                reiciendis cum nemo sed asperiores ut molestiae eaque aliquam
+                illo ipsa iste vero dolor voluptates.
               </p>
             </BodySection>
-            
+
             <Footer />
           </div>
         </React.Fragment>

@@ -10,9 +10,17 @@ const listNotifications = [
 ];
 
 describe('Notifications component', () => {
-  it('renders the correct number of items and the correct HTML for each', () => {
-    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
+  let wrapper;
 
+  beforeEach(() => {
+    wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
+  });
+
+  it('renders without crashing', () => {
+    expect(wrapper.exists()).toBe(true);
+  });
+
+  it('renders the correct number of items and the correct HTML for each', () => {
     // Check if the ul contains exactly 3 children
     expect(wrapper.find('ul').children().length).toBe(3);
 
@@ -22,11 +30,10 @@ describe('Notifications component', () => {
 
   it('calls console.log with the correct message when markAsRead is called', () => {
     const consoleSpy = jest.spyOn(console, 'log');
-    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
     const instance = wrapper.instance();
 
     // Call the markAsRead function
-    instance.markAsRead(1);
+    instance.props.markNotificationAsRead(1);
 
     // Check if console.log was called with the correct message
     expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
@@ -36,7 +43,6 @@ describe('Notifications component', () => {
   });
 
   it('does not rerender when updating props with the same list', () => {
-    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
     const instance = wrapper.instance();
     const shouldComponentUpdateSpy = jest.spyOn(instance, 'shouldComponentUpdate');
 
@@ -49,7 +55,6 @@ describe('Notifications component', () => {
   });
 
   it('rerenders when updating props with a longer list', () => {
-    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
     const instance = wrapper.instance();
     const shouldComponentUpdateSpy = jest.spyOn(instance, 'shouldComponentUpdate');
 
@@ -60,5 +65,38 @@ describe('Notifications component', () => {
     // Check if shouldComponentUpdate was called and returned true
     expect(shouldComponentUpdateSpy).toHaveBeenCalled();
     expect(shouldComponentUpdateSpy).toHaveReturnedWith(true);
+  });
+
+  it('renders "No new notification for now" when listNotifications is empty', () => {
+    wrapper.setProps({ listNotifications: [] });
+    expect(wrapper.find('ul').children().text()).toBe('No new notification for now');
+  });
+
+  it('renders the menu item when displayDrawer is false', () => {
+    wrapper.setProps({ displayDrawer: false });
+    expect(wrapper.find('.menuItem').exists()).toBe(true);
+  });
+
+  it('does not render the Notifications div when displayDrawer is false', () => {
+    wrapper.setProps({ displayDrawer: false });
+    expect(wrapper.find('.Notifications').exists()).toBe(false);
+  });
+
+  it('renders the Notifications div when displayDrawer is true', () => {
+    expect(wrapper.find('.Notifications').exists()).toBe(true);
+  });
+
+  it('calls handleDisplayDrawer when the menu item is clicked', () => {
+    const handleDisplayDrawer = jest.fn();
+    wrapper.setProps({ displayDrawer: false, handleDisplayDrawer });
+    wrapper.find('.menuItem').simulate('click');
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+  });
+
+  it('calls handleHideDrawer when the close button is clicked', () => {
+    const handleHideDrawer = jest.fn();
+    wrapper.setProps({ handleHideDrawer });
+    wrapper.find('button').simulate('click');
+    expect(handleHideDrawer).toHaveBeenCalled();
   });
 });
