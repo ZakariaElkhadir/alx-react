@@ -1,5 +1,4 @@
-import * as notifications from '../notification.json';
-
+import * as notifications from '../../notifications.json';
 
 function getAllNotificationsByUser(userId) {
     const userNotifications = notifications.default.filter(notification => notification.author.id === userId);
