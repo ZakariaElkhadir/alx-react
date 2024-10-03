@@ -24,3 +24,14 @@ export const hideNotificationDrawer = () => {
         type: HIDE_NOTIFICATION_DRAWER
     };
 };
+export function bindUIActionCreators(dispatch) {
+    return bindActionCreators(
+      {
+        login,
+        logout,
+        displayNotificationDrawer,
+        hideNotificationDrawer,
+      },
+      dispatch
+    );
+  }

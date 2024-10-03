@@ -9,3 +9,12 @@ export const setNotificationFilter = (filter) => ({
     type: SET_TYPE_FILTER,
     filter,
 });
+export function bindNotificationActionCreators(dispatch) {
+    return bindActionCreators(
+      {
+        markAsRead,
+        setNotificationFilter,
+      },
+      dispatch
+    );
+  }

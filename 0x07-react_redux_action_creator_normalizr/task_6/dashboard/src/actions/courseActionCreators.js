@@ -13,3 +13,12 @@ export function unSelectCourse(index) {
     index: index,
   };
 }
+export function bindCourseActionCreators(dispatch) {
+  return bindActionCreators(
+    {
+      selectCourse,
+      unSelectCourse,
+    },
+    dispatch
+  );
+}
