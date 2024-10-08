@@ -1,5 +1,14 @@
-import { SELECT_COURSE, UNSELECT_COURSE } from "./courseActionTypes";
+import { SELECT_COURSE, UNSELECT_COURSE, FETCH_COURSE_SUCCESS} from "./courseActionTypes";
 
+
+
+export function fetchCourseSuccess(data){
+  return {
+    type: FETCH_COURSE_SUCCESS,
+    data: data
+  }
+
+}
 export function selectCourse(index) {
   return {
     type: SELECT_COURSE,
