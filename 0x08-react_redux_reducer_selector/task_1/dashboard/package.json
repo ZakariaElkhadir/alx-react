@@ -30,6 +30,7 @@
     "enzyme": "^3.11.0",
     "file-loader": "^6.2.0",
     "identity-obj-proxy": "^3.0.0",
+    "immutable": "^4.3.7",
     "jest-transform-stub": "^2.0.0",
     "jsdom": "^25.0.0",
     "normalizr": "^3.6.2",

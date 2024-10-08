@@ -1,22 +1,64 @@
-import { uiReducer, initialState } from "./uiReducer";
+import { uiReducer } from './uiReducer';
 import * as uiActionTypes from '../actions/uiActionTypes';
+import { Map } from 'immutable';
 
 describe('uiReducer', () => {
-    it('state returned by the uiReducer function equals the initial state when no action is passed', () => {
-        const state = uiReducer(undefined, {});
-        expect(state).toEqual(initialState);
-    });
-
-    it('state returned by the uiReducer function equals the initial state when the action SELECT_COURSE is passed', () => {
-        const state = uiReducer(undefined, { type: 'SELECT_COURSE' });
-        expect(state).toEqual(initialState);
-    });
-
-    it('state returned by the uiReducer function, when the action DISPLAY_NOTIFICATION_DRAWER is passed, changes correctly the isNotificationDrawerVisible property', () => {
-        const state = uiReducer(undefined, { type: uiActionTypes.DISPLAY_NOTIFICATION_DRAWER });
-        expect(state).toEqual({
-            ...initialState,
-            isNotificationDrawerVisible: true
+    it('should return the initial state', () => {
+        const initialState = Map({
+            isNotificationDrawerVisible: false,
+            isUserLoggedIn: false,
+            user: {}
         });
+        expect(uiReducer(undefined, {}).toJS()).toEqual(initialState.toJS());
+    });
+
+    it('should handle DISPLAY_NOTIFICATION_DRAWER', () => {
+        const initialState = Map({
+            isNotificationDrawerVisible: false,
+            isUserLoggedIn: false,
+            user: {}
+        });
+        const expectedState = initialState.set('isNotificationDrawerVisible', true);
+        expect(uiReducer(initialState, { type: uiActionTypes.DISPLAY_NOTIFICATION_DRAWER }).toJS()).toEqual(expectedState.toJS());
+    });
+
+    it('should handle HIDE_NOTIFICATION_DRAWER', () => {
+        const initialState = Map({
+            isNotificationDrawerVisible: true,
+            isUserLoggedIn: false,
+            user: {}
+        });
+        const expectedState = initialState.set('isNotificationDrawerVisible', false);
+        expect(uiReducer(initialState, { type: uiActionTypes.HIDE_NOTIFICATION_DRAWER }).toJS()).toEqual(expectedState.toJS());
+    });
+
+    it('should handle LOGIN_SUCCESS', () => {
+        const initialState = Map({
+            isNotificationDrawerVisible: false,
+            isUserLoggedIn: false,
+            user: {}
+        });
+        const expectedState = initialState.set('isUserLoggedIn', true);
+        expect(uiReducer(initialState, { type: uiActionTypes.LOGIN_SUCCESS }).toJS()).toEqual(expectedState.toJS());
+    });
+
+    it('should handle LOGIN_FAILURE', () => {
+        const initialState = Map({
+            isNotificationDrawerVisible: false,
+            isUserLoggedIn: true,
+            user: {}
+        });
+        const expectedState = initialState.set('isUserLoggedIn', false);
+        expect(uiReducer(initialState, { type: uiActionTypes.LOGIN_FAILURE }).toJS()).toEqual(expectedState.toJS());
+    });
+
+    it('should handle LOGOUT', () => {
+        const initialState = Map({
+            isNotificationDrawerVisible: false,
+            isUserLoggedIn: true,
+            user: {}
+        });
+        const expectedState = initialState.set('isUserLoggedIn', false);
+        expect(uiReducer(initialState, { type: uiActionTypes.LOGOUT }).toJS()).toEqual(expectedState.toJS());
     });
 });
