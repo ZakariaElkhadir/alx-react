@@ -16,9 +16,14 @@ export function mapStateToProps(state) {
   return {
     uiReducer: state.uiReducer,
     isLoggedIn: state.isLoggedIn,
+    displayDrawer: state.isNotificationDrawerVisible
     
   };
 }
+const mapDispatchToProps = {
+  displayNotificationDrawer,
+  hideNotificationDrawer
+};
 
 class App extends React.Component {
   constructor(props) {
@@ -100,6 +105,7 @@ class App extends React.Component {
 
   render() {
     return (
+      
       <AppContext.Provider
         value={{
           user: this.state.user,
@@ -141,6 +147,7 @@ class App extends React.Component {
           </div>
         </React.Fragment>
       </AppContext.Provider>
+      
     );
   }
 }
