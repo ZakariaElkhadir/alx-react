@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import { connect } from "react-redux";
 import Login from "../Login/Login";
 import CourseList from "../CourseList/CourseList";
 import Notifications from "../Notifications/Notifications";
@@ -10,6 +11,14 @@ import { StyleSheet, css } from "aphrodite";
 import PropTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
 import { AppContext, user } from "./AppContext";
+
+export function mapStateToProps(state) {
+  return {
+    uiReducer: state.uiReducer,
+    isLoggedIn: state.isLoggedIn,
+    
+  };
+}
 
 class App extends React.Component {
   constructor(props) {

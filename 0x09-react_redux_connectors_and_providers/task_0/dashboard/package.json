@@ -24,6 +24,7 @@
     "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.8",
     "@testing-library/jest-dom": "^6.5.0",
     "aphrodite": "^2.4.0",
     "cheerio": "^1.0.0-rc.10",
@@ -37,6 +38,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-redux": "^9.1.2",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
     "style-loader": "^4.0.0",
