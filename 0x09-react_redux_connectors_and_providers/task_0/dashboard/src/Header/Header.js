@@ -1,39 +1,62 @@
-import React, { useContext } from "react";
-import logo from "../assets/holber_logo.jpg";
+import React, { Component } from "react";
+import holberton_logo from "../assets/holberton_logo.jpg";
 import { StyleSheet, css } from "aphrodite";
-import { AppContext } from "../App/AppContext";
-function Header() {
-  const {user, logOut} = useContext(AppContext)
-  return (
-    <div>
-      <header className={`App-header ${css(styles.header)}`}>
-        <img src={logo} width={150} alt="holberton school" />
+import AppContext from "../App/AppContext";
+
+class Header extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { user, logOut } = this.context;
+
+    return (
+      <div className={css(styles.header)}>
+        <img src={holberton_logo} className={css(styles.headerImg)} />
         <h1>School dashboard</h1>
-      </header>
-      {user.isLoggedIn && (
-        <section className={css(styles.greeting)} id="logoutSection">
-          Welcome<strong> {user.email} </strong>
-          <em>
-            <a href="#" onClick={logOut}>
+
+        {user.isLoggedIn && (
+          <p id="logoutSection" className={css(styles.logoutSection)}>
+            Welcome <b>{`${user.email} `}</b>
+            <span onClick={logOut} className={css(styles.logoutSectionSpan)}>
               (logout)
-            </a>
-          </em>
-        </section>
-      )}
-    </div>
-  );
+            </span>
+          </p>
+        )}
+      </div>
+    );
+  }
 }
+
+const cssVars = {
+  mainColor: "#e01d3f",
+};
+
 const styles = StyleSheet.create({
   header: {
-    color: '#e0354b',
-    fontFamily: 'Arial, Helvetica, sans-serif',
-    display: 'flex',
-    alignItems: 'center',
-    padding: '16px',
+    display: "flex",
+    alignItems: "center",
+    color: cssVars.mainColor,
+    fontSize: "20px",
   },
-  greeting: {
-    marginTop: "1rem",
-  }
-  })
+
+  headerImg: {
+    width: "200px",
+  },
+  logoutSection: {
+    color: "black",
+    position: "absolute",
+    right: 0,
+    paddingRight: "20px",
+    alignSelf: "flex-end",
+  },
+  logoutSectionSpan: {
+    fontStyle: "italic",
+    cursor: "pointer",
+  },
+});
+
+Header.contextType = AppContext;
 
 export default Header;

@@ -1,50 +1,55 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import withLogging from './WithLogging'
-import App from '../App/App';
+import { shallow, mount } from "enzyme";
+import React from "react";
+import WithLogging from "./WithLogging";
+import Login from "../Login/Login";
+import { StyleSheetTestUtils } from "aphrodite";
 
-describe('withLogging HOC', () => {
-  let consoleLogSpy;
-
-  // Wrap App component with the HOC
-  const WrappedComponent = withLogging(App);
-
-  beforeEach(() => {
-    // Spy on console.log
-    consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+describe("<WithLogging />", () => {
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
-  afterEach(() => {
-    // Restore console.log after each test
-    consoleLogSpy.mockRestore();
-  });
+  it("calls console.log on mount and on unmount with Component when the wrapped element is pure html", () => {
+    console.log = jest.fn();
 
-  it('should log the message on mount', () => {
-    // Mount the wrapped component
-    const wrapper = mount(<WrappedComponent />);
+    const HOC = WithLogging(() => <p />);
 
-    // Check if the correct message was logged on mount
-    expect(consoleLogSpy).toHaveBeenCalledWith('Component App is mounted');
-    
-    // Clean up
+    const wrapper = mount(<HOC />);
+    expect(wrapper.exists()).toEqual(true);
+
+    expect(console.log).toHaveBeenNthCalledWith(
+      1,
+      `Component Component is mounted`
+    );
     wrapper.unmount();
+    expect(console.log).toHaveBeenNthCalledWith(
+      2,
+      `Component Component is going to unmount`
+    );
+
+    jest.restoreAllMocks();
   });
+  it("calls console.log mount and on unmount with the name of the component when the wrapped element is the Login component. ", () => {
+    console.log = jest.fn();
 
-  it('should log the message on unmount', () => {
-    // Mount and unmount the component
-    const wrapper = mount(<WrappedComponent />);
+    const HOC = WithLogging(Login);
+
+    const wrapper = mount(<HOC />);
+    expect(wrapper.exists()).toEqual(true);
+
+    expect(console.log).toHaveBeenNthCalledWith(
+      1,
+      `Component Login is mounted`
+    );
     wrapper.unmount();
+    expect(console.log).toHaveBeenNthCalledWith(
+      2,
+      `Component Login is going to unmount`
+    );
 
-    // Check if the correct message was logged on unmount
-    expect(consoleLogSpy).toHaveBeenCalledWith('Component App is going to unmount');
-  });
-
-  it('should render the wrapped component', () => {
-    const wrapper = mount(<WrappedComponent />);
-    
-    // Ensure that the wrapped component (App) is rendered
-    expect(wrapper.find(App).length).toBe(1);
-    
-    wrapper.unmount();
+    jest.restoreAllMocks();
   });
 });

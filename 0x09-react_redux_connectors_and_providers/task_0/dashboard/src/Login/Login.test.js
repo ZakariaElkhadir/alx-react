@@ -1,18 +1,57 @@
-import React from 'react'
+import { shallow } from "enzyme";
+import React from "react";
 import Login from "./Login";
-import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from "aphrodite";
 
+describe("<Login />", () => {
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
 
-describe('Login component', () => {
-    it('renders without crashing', () => {
-        const wrapper = shallow(<Login/>);
-        expect(wrapper.exists()).toBe(true);
+  it("Login renders without crashing", () => {
+    const wrapper = shallow(<Login />);
+    expect(wrapper.exists()).toEqual(true);
+  });
+  it("Verify that the components render 3 input", () => {
+    const wrapper = shallow(<Login />);
+    wrapper.update();
+    expect(wrapper.find("div input")).toHaveLength(3);
+  });
+  it("Verify that the components render 2 label", () => {
+    const wrapper = shallow(<Login />);
+    wrapper.update();
+    expect(wrapper.find("div label")).toHaveLength(2);
+  });
+
+  it("Verify that the components render 2 label", () => {
+    const wrapper = shallow(<Login />);
+    const submitInput = wrapper.find("form input[type='submit']");
+
+    expect(submitInput).toHaveLength(1);
+    expect(submitInput.prop("disabled")).toEqual(true);
+  });
+
+  it("Verify that the components render 2 label", () => {
+    const wrapper = shallow(<Login />);
+    const emailInput = wrapper.find("#email");
+    const passwordInput = wrapper.find("#password");
+
+    emailInput.simulate("change", {
+      target: { name: "email", value: "Larry@email.com" },
     });
-    it('renders 2 input and 2 label', () => {
-        const wrapper = shallow(<Login/>);
-        const input = wrapper.find('input');
-        const label = wrapper.find('label');
-        expect(input.length).toBe(2);
-        expect(label.length).toBe(2);
-    })
+
+    let submitInput = wrapper.find("form input[type='submit']");
+
+    expect(submitInput.prop("disabled")).toEqual(true);
+
+    passwordInput.simulate("change", {
+      target: { name: "password", value: "123456789" },
+    });
+
+    submitInput = wrapper.find("form input[type='submit']");
+    expect(submitInput.prop("disabled")).toEqual(false);
+  });
 });
